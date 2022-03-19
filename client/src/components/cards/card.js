@@ -6,7 +6,7 @@ return(
 <h3>{name}</h3>
 <h5>{genres}</h5>
 
-<img src={image} alt='image not found' whith="200px" height="200px"/>
+<img src={image} alt='' whith="200px" height="200px"/>
 
 </div>
 

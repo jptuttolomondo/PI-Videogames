@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react'
+import React, {useState } from 'react'
 import {useEffect } from 'react'
 import {useDispatch,useSelector} from'react-redux'
 import {Link} from'react-router-dom'
@@ -13,9 +13,9 @@ const allVideos=useSelector((state)=>state.videogames)
 
 
 const [currentPage,setCurrentPage]=useState(1)
-const [videosPerPage,setVideosPerPage]=useState(15)
+const [videosPerPage]=useState(15)
 const [order,setOrder]=useState('')
-const [created,setCreated]=useState('')
+
 
 
 const indexOfLastVideo= currentPage* videosPerPage
@@ -57,7 +57,7 @@ function handleFilterCreated(e){
 }
 function handleOrderByName(e){
     e.preventDefault(); // el preventDefault en la funcion, no en el formulario
-   // dispatch(getAllVideogames())
+
    console.log(e.target.value)
    if(e.target.value==="all") dispatch(getAllVideogames())
       dispatch(orderByName(e.target.value))  
@@ -114,7 +114,7 @@ return(
             </Link>
                      </div>
                      )
-                        //console.log(e.name)
+                     
             })
         }
         </div>

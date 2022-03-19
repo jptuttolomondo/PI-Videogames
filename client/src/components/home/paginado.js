@@ -15,20 +15,9 @@ return(
         <li key={number}>
             <a onClick={()=>paginado(number)}>{number}</a>
         </li>
-
     ))
-
-
     }
-
 </ul>
-
 </nav>
-
-
 )
-
-
-
-
 }

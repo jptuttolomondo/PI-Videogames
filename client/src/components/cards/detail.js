@@ -14,7 +14,7 @@ useEffect(()=>{
 
  dispatch(getDetail(id))
 
-},[dispatch])
+},[dispatch,id])
 
 const myVideo= useSelector((state)=>state.detail)
 
@@ -29,7 +29,7 @@ return(
         myVideo.length>0?
         <div>
 <h1> {myVideo[0].name}</h1>
-<img src={myVideo[0].background_image }width="150" height="100"></img>
+<img src={myVideo[0].background_image } alt='' width="150" height="100"></img>
 <h3>Descripcion: {myVideo[0].description}</h3>
 <h3>rating: {myVideo[0].rating}</h3>
 <h3>Plataformas  : {myVideo[0].createdInDb===true? sacarPlataforma(myVideo[0].platforms)
