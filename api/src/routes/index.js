@@ -12,11 +12,6 @@ const getApiInfo= async()=>{
 let promises=[]
 let allGames=[]
 try{
-// for(let i=1;i<6;i++){
-//      promises.push( axios.get(`https://api.rawg.io/api/games?key=${APIKEY}&page=${i}`)
-//      .then((response)=>{ return response  }) )
-//     }//for
-
             let url = `https://api.rawg.io/api/games?key=${APIKEY}`;
            for(let i =0;i<5;i++){
                let apiVideo = await axios.get(url)
@@ -57,7 +52,7 @@ const getDbInfo= async ()=> {
 return await Videogame.findAll({
 include:{//trae el modelo genre mediante el atributo name
     model:Genre,
-    attributes:['name'],
+    attributes:["name"],
     througth:{//mediante los atributos, traeme el name. sino traeria solo name porque es el unico, pero
         //si hubiera mas atributos podria traer mas
         attributes:[],
@@ -79,7 +74,6 @@ router.get('/videogames',async (req,res)=>{
 const name=req.query.name
 console.log('name  :',name)
 const infoTotal=await getAllVideogames()
-//console.log(infoTotal)
 if(name) {let videoNames= await infoTotal.filter(el=>el.name.toLowerCase().includes(name.toLowerCase()))
 videoNames.length?res.status(200).send(videoNames)
                 :res.status(400).send('no existe el videogame')}
@@ -90,21 +84,12 @@ else{res.status(200).send(infoTotal)}
 
 router.get('/genres',async(req,res)=>{
 const genreApi= await axios.get(`https://api.rawg.io/api/genres?key=${APIKEY}`)
-//console.log('genreApi: ',genreApi.data.results.map(e=>e.name))
 const genero=genreApi.data.results.map(e=>e.name)
-console.log('generos: ',genero)
-// const generoEach=genero.map(e=>{
-//     for (let i=0;i<e.length;i++)return e[i] 
-// })
-
-// //ver el .flat de video de selene
- //console.log(generoEach)
 genero.forEach(el => {
     Genre.findOrCreate({
         where: {name:el}
     })
 });
-console.log('guardado')
 const allGenres= await Genre.findAll()
 res.send(allGenres)
 })
@@ -140,12 +125,11 @@ let videogameCreated=await Videogame.create({//creo en el modelo Videogame una i
     background_image,
     createdInDb//no le pasa genres porque hay que hacer la relacion aparte
 })
-console.log('videogame creado: ',videogameCreated)
+//console.log('videogame creado: ',videogameCreated)
 let genreDb= await Genre.findAll({
     where:{name:genres}//genero hay que encontrarlo en el modelo de bd que ya esta guyardado
     //y que coincida con el seleccionado en el formulario de front, que sera genres 
 })
-
 videogameCreated.addGenre(genreDb)
 res.send('videogame creado correctamente')
 })

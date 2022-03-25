@@ -1,0 +1,52 @@
+.hbuttonSearch{
+    
+    font-size: 7px;
+    font-weight: bold;
+    text-align:center;
+    margin-left: 3%;
+    color: rgb(32, 7, 141);
+    font-family: cursive;
+   
+
+}
+.buttonSearch{
+    margin: 1px 1px 1px 1px;
+    padding: 2px 7px 2px 7;
+    margin-top: 3px;
+    margin-right: 60px;
+    margin-left: 30px;
+	background-color:rgb(219, 224, 246);
+    border-color: rgb(4, 26, 3);
+    border: 1px solid;
+    border-radius: 10px;
+    width: 50px;
+    height: 18px;
+    padding: 1px;
+    font-size: 5px;
+    font-family:cursive;
+	cursor:pointer;
+	color:rgb(15, 15, 15);
+    font-weight: bold;
+    letter-spacing: 2px;
+   
+}
+
+.buttonSearch:hover{
+    background-color: rgb(207, 236, 175);
+    color: rgb(14, 13, 13);
+}
+.inputSearch{
+    border-radius: 10px;
+    border: 1px solid;
+    width: 100px;
+    height: 10px;
+    font-size: 6px;
+    font-family:cursive;
+    padding: 3px;
+    display: inline;
+}
+.bloque{
+    display:inline;
+    padding: 3px;
+    
+}

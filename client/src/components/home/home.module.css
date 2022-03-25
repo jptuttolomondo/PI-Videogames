@@ -1,0 +1,159 @@
+.fondo{
+    overflow-y: hidden ! important;
+    overflow-x: hidden ! important;
+    /*background-color: rgb(250, 220, 139);*/
+background-image: url(./abstract-1780165_1920.png);
+    background-size: cover;
+
+}
+.h1{ 
+    margin: 0 3px 0 0;
+    padding: 1px 1px 1px 1px;
+    font-size: 20px;
+    font-weight: bold;
+    text-align:center;
+    margin-left: 3px;
+    margin-bottom: 1px;
+    color: rgb(32, 7, 141);
+    font-family: cursive;
+   
+}
+
+.h2{ 
+    margin: 0 3px 0 0;
+    padding: 1px 1px 1px 1px;
+    font-size: 7px;
+   
+    text-align:center;
+    margin-left: 3px;
+    margin-bottom: 1px;
+    color: rgb(255, 251, 5);
+    font-family: cursive;
+   
+}
+
+
+
+.hbutton{
+    
+    font-size: 7px;
+    font-weight: bold;
+    text-align:center;
+    margin-left: 3%;
+    color: rgb(32, 7, 141);
+    font-family: cursive;
+   
+
+}
+.button1{
+    margin: 0 10px 0 0;
+    padding: 2px 7px 2px 7;
+    margin-top: 3px;
+    margin-bottom: 1px;
+    margin: right 600px;
+    margin: left 30px;
+	background-color:rgb(219, 224, 246);
+    border-color: rgb(4, 26, 3);
+    border: 1px solid;
+border-radius: 10px;
+    width: 70px;
+    font-size: 5px;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+	cursor:pointer;
+	color:rgb(15, 15, 15);
+	font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+	padding:1px;
+    letter-spacing: 2px;
+}
+.button2{
+    margin-top: 10px;
+    margin: right 600px;
+    margin: left 300px;;
+	background-color:rgb(53, 207, 187);
+    border-color: rgb(4, 26, 3);
+
+    width: 350px;
+    font-size: 30px;
+	cursor:pointer;
+	color:rgb(39, 255, 20);
+	font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+	padding:5px;
+    letter-spacing: 2px; 
+}
+.button3{
+    margin-top: 1px;
+    margin: right 600px;
+    margin: left 100px;;
+	background-color:rgb(53, 207, 187);
+    border-color: rgb(4, 26, 3);
+border-radius: 5%;
+    width: 350px;
+    font-size: 30px;
+	cursor:pointer;
+	color:rgb(137, 154, 228);
+	font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+	padding:5px;
+    letter-spacing: 2px; 
+}
+
+
+
+.button1:hover{
+    background-color: rgb(207, 236, 175);
+    color: rgb(14, 13, 13);
+}
+.button2:hover{
+    background-color: rgb(251, 247, 14);
+    color: rgb(14, 13, 13);
+}
+.button3:hover{
+    background-color: rgb(251, 247, 14);
+    color: rgb(14, 13, 13);
+}
+
+.box{
+    margin: 0 10px 0 0;
+    padding: 2px 7px 2px 7;
+        background:rgb(219, 224, 246);
+        border: 1px solid;
+        border-radius: 10px;
+        font-size: 6px;
+        height: 17px;
+        padding: 3px;
+        width: 90px;
+        color: rgb(14, 13, 13);
+    font-family:cursive;
+
+}
+
+.box:hover{
+    background-color: rgb(207, 236, 175);
+    color: rgb(14, 13, 13);
+}
+
+.hbox{
+    
+    font-size: 7px;
+
+    text-align:center;
+    margin-left: 3%;
+    color: rgb(32, 7, 141);
+    font-family: cursive;
+   
+
+}
+.containerCard{
+    display: flex;
+    flex-wrap: wrap;
+    text-decoration: none;
+    margin-bottom: 300px
+  }
+  .cards {
+    flex-wrap: wrap;
+    background-attachment: fixed;
+;
+    align-items:flex-end;
+   text-decoration: none;
+    text-align: center;
+  
+  }

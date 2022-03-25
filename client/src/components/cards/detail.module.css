@@ -1,0 +1,143 @@
+.detailBody{
+    overflow-y: hidden ! important;
+    overflow-x: hidden ! important;
+    /*background-color: rgb(250, 220, 139);*/
+background-image: url(../home/abstract-1780165_1920.png);
+    background-size: cover;
+    font-weight: bold;
+font-family: cursive;
+
+}
+
+.numberDetail{
+    font-size: 5px; 
+}
+
+
+.detailCard {
+    background-color: rgb(18, 19, 18);
+    margin: 200px;
+    border-radius: 3%;
+border-style: solid;
+border-color: black;
+    width: 15rem;
+    height: 20rem;
+    text-align: center;
+
+    margin-top:10px ;
+    font-size: 6px;
+    font-family: cursive;
+   
+    
+    flex-wrap:wrap;
+    background-attachment: fixed; 
+     /*centrado en pantalla*/
+margin-left: auto;
+margin-right: auto;
+
+ 
+    text-align: center;
+  }
+  .containerCard{
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .cards {
+    flex-wrap: wrap;
+    background-attachment: fixed;
+
+    align-items:flex-end;
+   
+    text-align: center;
+  
+  }
+
+
+  .detailTitle {
+    text-align:center;
+    font-family:cursive;
+    
+  color: rgba(222, 216, 228, 0.945);
+    font-size: 3ch;
+    margin-bottom: 2px;
+    margin-top: 0pt;
+  }
+  
+  .detailData {
+    text-align:center;
+    font-family:cursive;
+    
+  color: rgba(222, 216, 228, 0.945);
+    font-size:5px;
+    margin-bottom: 0px;
+    margin-top: 0pt;
+  }
+  
+  .closeIcon {
+    display:flex;
+  justify-content: flex-end;
+    margin-right: 10px;
+    margin-top: 4px;
+    font-size:5px;
+    border-radius: 5px;
+background-color: rgb(255, 23, 243);
+border-width: 1px;
+display: block;
+margin: 0 0 0 auto;
+  }
+  .closeIcon:hover{
+      cursor: pointer;
+    background-color: rgb(207, 236, 175);
+    color: rgb(14, 13, 13);
+}
+
+
+
+  .card-body {
+    
+    margin-top: 20px !important;
+    padding-top: 20px !important;
+  }
+  .title{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+  }
+  .row {
+    flex-wrap: wrap;
+    background-attachment:fixed;
+    display:flex;
+    justify-content: center;
+  }
+
+  .button1{
+    margin: 0 10px 0 0;
+    padding: 2px 7px 2px 7;
+    margin-top: 3px;
+    margin-bottom: 0px;
+    margin: right 600px;
+    margin: left 30px;
+	background-color:rgb(219, 224, 246);
+    border-color: rgb(4, 26, 3);
+    border: 2px solid;
+border-radius: 10px;
+    width: 15px;
+    font-size: 8px;
+    font-family:cursive;
+	cursor:pointer;
+	color:rgb(15, 15, 15);
+	font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+	padding:1px;
+    letter-spacing: 2px;
+}
+
+.loading{
+  background-color: deeppink;
+  font-family: cursive;
+  font-size:12px;
+
+  width: 100px;
+  margin-left: auto;
+  margin-right: auto;
+  
+   
+      text-align: center;
+}

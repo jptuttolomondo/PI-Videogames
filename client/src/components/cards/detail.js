@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { useDispatch ,useSelector} from "react-redux";
 import {Link} from'react-router-dom'
 import { getDetail } from "../../actions";
-
+import detailFormat from'./detail.module.css'
 
 export default function  Detail(){
         const { id} = useParams();
@@ -18,32 +18,39 @@ useEffect(()=>{
 
 const myVideo= useSelector((state)=>state.detail)
 
-function sacarPlataforma(elemento){
-let aux=elemento.slice(elemento.indexOf("{")+2,elemento.indexOf(",")-1)+('   ') +elemento.slice(elemento.indexOf(",")+2,elemento.indexOf("}")-1)
-return aux
-}
 
 return(
-<div>
-{
-        myVideo.length>0?
-        <div>
-<h1> {myVideo[0].name}</h1>
-<img src={myVideo[0].background_image } alt='' width="150" height="100"></img>
-<h3>Descripcion: {myVideo[0].description}</h3>
-<h3>rating: {myVideo[0].rating}</h3>
-<h3>Plataformas  : {myVideo[0].createdInDb===true? sacarPlataforma(myVideo[0].platforms)
-                        :myVideo[0].platforms.map(el=>el.name + (' '))}</h3>
-<h3>Genero: { myVideo[0].genres.map(el=>el.name + (' '))} </h3>
+<div className={detailFormat.detailBody}>
+       <p></p>
+        Detalle de Videogames
+        <p></p>
+        <div className={detailFormat.detailCard} >
+        <Link to='/home' ><button className={detailFormat.closeIcon}title="Volver a Home">X</button></Link> 
+        {
+           myVideo.length>0?
+        <div >
+        <div className={detailFormat.detailTitle} > {myVideo[0].name}</div>
+        <img src={myVideo[0].background_image } alt='' width="150" height="100"></img>
+        <div className={detailFormat.detailData}>
+        <h2>Descripción: </h2><h3>{myVideo[0].description}</h3>
+        <h2>Rating: <div className={detailFormat.numberDetail}>{myVideo[0].rating}</div> </h2>
+        <h2>Plataformas  : </h2><h4>{myVideo[0].createdInDb===true?  myVideo[0].platforms.map(elem=><p key={elem}>{elem}</p>)
+                                        :myVideo[0].platforms.map(el=><p key={el.name}>{el.name} </p>)}</h4>
+     
+        <h2>Genero/s: </h2><h4>{ myVideo[0].genres.map(elem=><p key={elem.name}> {elem.name} </p>)
+    
+
+} </h4>
+
         </div>
-                    : <p>Loading..</p>
+        </div>
+                    : <p className={detailFormat.loading}>Loading..</p>
+                   
     }
 
-    <Link to='/home' ><button>Volver</button></Link>
     </div>
+</div>
 )
-
 }
-/* ver con los creados
-<h3>Genero: {!myVideo[0].createdDb?myVideo[0].genres[0].name+ ' ': myVideo[0].genres.map(el=>el.name + (' '))} </h3>
-*/
+
+

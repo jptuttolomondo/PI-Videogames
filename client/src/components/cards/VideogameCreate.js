@@ -2,7 +2,7 @@ import React ,{useState,useEffect} from "react";
 import {Link}from 'react-router-dom'
 import { useDispatch,useSelector } from "react-redux";
 import { postVideogame, getGenres,getPlatforms } from "../../actions";
-
+import formatCreate from'./VideogameCreate.module.css'
 
 export  function VideogameCreate(){
 const dispatch=useDispatch()
@@ -35,8 +35,9 @@ function validate(input) {
         errors.name = "Name required"
     }
     else if(! (/^[A-Z]+$/i.test(input.name))) errors.name="El nombre debe contener solo letras"
-
-
+         else {if(! (/^[A-Z]+$/i.test(input.name))) errors.name="El nombre debe comenzar con mayúsculas"
+                if(! (/^[A-Z][a-z]+$/.test(input.name))) errors.name="El nombre debe comenzar con mayúsculas seguido de todas minúsculas,sin espacios"
+         }
     if (!input.description) {
         errors.description = "Complete description"
     }
@@ -49,7 +50,7 @@ function validate(input) {
                         else{ 
                       
                     
-                    if (!(/^(0[1-9]|1\d|2\d|3[01])\-(0[1-9]|1[0-2])\-(0[0-9]|1[0-9]|2[0-9])$/.test(input.released)))  //eslint-disable-line
+                    if (!(/^(0[1-9]|1\d|2\d|3[01])\-(0[1-9]|1[0-2])\-(0[0-9]|1[0-9]|2[0-2]|8[0-9]|9[0-9])$/.test(input.released)))  //eslint-disable-line
              errors.released = "Format error (dd-mm-yy). Ingresar fecha valida"
              else {
              errors.released = ""
@@ -58,8 +59,8 @@ function validate(input) {
 
 if(!input.background_image)errors.background_image="ingresar url "
 else 
-    if(!(/^(http|https)\/\/[a-z0-9-]+\.[a-z]{2,4}/gi.test(input.background_image)) )errors.background_image='ingresar url valida'
-
+    if(!(/^(http|https):\/\/[a-z0-9.-]+\.[a-z]{2,4}/gi.test(input.background_image)) )errors.background_image='ingresar url valida'
+  
 
     if (input.platforms.length < 1) {
         errors.platforms = "Enter platforms"
@@ -90,7 +91,6 @@ function handlePlatforms(e){
         setErrors(validate({...input,platforms:[...input.platforms,e.target.value]}))
      setInput({...input,platforms:[...input.platforms,e.target.value]})//ver como se concatena todos los check en un solo string
     
-   // console.log(input.platforms)
     }
 
 
@@ -134,70 +134,76 @@ function handleSubmit(e){
 
 }
 return(
-<div>
-    <h1>crear nuevo videogame</h1>
-    <Link to='/home'><button>Volver</button></Link> 
+<div className={formatCreate.createBody}>
+    <div className={formatCreate.createCard} >
+
+
+    
+    
+    <Link to='/home' ><button className={formatCreate.closeIcon}title="Volver a Home">X</button></Link>
+     <div className={formatCreate.createTitle} >Crear nuevo videogame</div>
     <form onSubmit={(e)=>handleSubmit(e)} >
-    <div >
-        <label>Name :</label>
-        <input 
+    <div  >
+        <label className={formatCreate.createData}>Name :</label>
+        <input className={formatCreate.inputCreate}
         type="text"
         value={input.name} 
         name="name"
         onChange={handleChange}
         />
-         { errors.name && (<p> {errors.name} </p> )}
+         { errors.name && (<p className={formatCreate.createValid}> {errors.name} </p> )}
     </div>
 
     <div >
-        <label>Description:</label>
-    <textarea
+        <label className={formatCreate.createData}>Description:</label>
+    <textarea className={formatCreate.inputDescriptionCreate} 
     type="text"
     value={input.description}
     name="description"
     onChange={handleChange}
-    rows="5" cols="45"
+    rows="2" cols="20"
     />
-    { errors.description&&(<p>{errors.description}</p>) }
+    { errors.description&&(<p className={formatCreate.createValid}>{errors.description}</p>) }
     </div>
 
     <div >
-    <label>Released:</label>
-    <input 
+    <label className={formatCreate.createData}>Released:</label>
+    <input className={formatCreate.inputCreate} 
     type="text"
     value={input.released}
     name="released"
     onChange={handleChange}
     />
-    {errors.released&&(<p>{errors.released}</p>)}
+    {errors.released&&(<p className={formatCreate.createValid}>{errors.released}</p>)}
     </div>
 
     <div>
-    <label>Rating:</label>
-    <input 
+    <label className={formatCreate.createData}>Rating:</label>
+    <input className={formatCreate.inputCreate}
     type="number"
     value={input.rating}
     name="rating"
     onChange={handleChange}
     />
-    {errors.rating&&(<p>{errors.rating}</p>)}
+    {errors.rating&&(<p className={formatCreate.createValid}>{errors.rating}</p>)}
     </div>
 
     <div >
-        <label>Imagen:</label>
-    <input 
+        <label className={formatCreate.createData}>Imagen:</label>
+    <input className={formatCreate.inputCreate}
     type="url"
     value={input.background_image}
     name="background_image"
     onChange={handleChange}
     />
-    {errors.background_image&&(<p>{errors.background_image}</p>)}
+    {errors.background_image&&(<p className={formatCreate.createValid}>{errors.background_image}</p>)}
     </div>
 
     <div>
-    <label>Plataformas:</label>
-    <select onChange={(e)=>handlePlatforms(e)} >
-        <option>seleccionar</option>
+    <label className={formatCreate.createData}>Plataformas:</label>
+    <select onChange={(e)=>handlePlatforms(e)} className={formatCreate.box}>
+        <option value='#'>seleccionar</option>
+        
         {plataforma.map((elem)=>(
         <option value={elem} key={elem}>{elem} </option> 
         ))}
@@ -207,62 +213,62 @@ return(
  
    
     <div>
-    <label>Generos:</label>
-    <select onChange={(e)=>handleSelect(e)}>
-        <option>seleccionar</option>
+    <label className={formatCreate.createData}>Seleccionar Generos:</label>
+    <select onChange={(e)=>handleSelect(e)} className={formatCreate.box}>
+        <option value='#'>seleccionar</option>
+     
         {genres.map((el)=>(
          <option value={el.name} key={el.id}>{el.name} </option> 
               ))}
     </select>
-    { errors.genres && (<p> {errors.genres} </p> )}
+    <p></p>    <p></p>
+    { errors.genres && (<p className={formatCreate.createValid}> {errors.genres} </p> )}
     </div>
 
 
     <div>
-    <label>Plataformas seleccionadas</label>
+    <label className={formatCreate.createData}>Plataformas seleccionadas</label>
     <ul>
                         {input.platforms.map(e => (
-                            <div key={e.id}>
-                                <li key={e.id}>{e}<button
+                          
+                                <li key={e}className={formatCreate.lista}>{e} <button className={formatCreate.closeIcon1}
                                    type="button"
                                     onClick={() => handleDeletePlatform(e)}
-                                >X</button>
+                                > X</button>
                                 </li>
-                            </div>
+                      
                         ))}
                     </ul>
    
 </div>
 <div>
-    <label>Generos seleccionados</label>
+    <label className={formatCreate.createData}>Generos seleccionados</label>
     <ul>
                         {input.genres.map(e => (
-                            <div key={e.id}>
-                                <li  >{e}<button
+                         
+                                <li  key={e} className={formatCreate.lista}>{e}<button className={formatCreate.closeIcon1}
                                    type="button"
                                     onClick={() => handleDeleteGenre(e)}
                                 >X</button>
                                 </li>
-                            </div>
+                
                         ))}
                     </ul>
    
 </div>
    {
                     errors && (errors.name || errors.rating || errors.description || errors.genres || errors.platforms|| errors.released || errors.background_image) ?
-                        <p >Complete Form</p>
+                        <p className={formatCreate.createValid} >Complete Form</p>
                         :
-                         <button type="submit">Crear videogame</button>   
+                         <button type="submit" className={formatCreate.button1}>Crear videogame</button>   
                 }
 
     </form>
+</div>
 </div>
 )
 }
 
 
-/*
-
-  */
 
 

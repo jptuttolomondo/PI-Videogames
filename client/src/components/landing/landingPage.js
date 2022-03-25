@@ -1,13 +1,27 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import landPageStyles from './landingPage.module.css'
+
 export function LandingPage() {
 return(
-    <div>
-<h1>landPage PI videogames</h1>
+<div className={landPageStyles.background}>
 
-<Link to= '/home'>
-<button>ingresar</button>
-</Link>
+
+<div className={landPageStyles.h1}> PI videogames Henry FT course</div>
+
+   <p> <span className={landPageStyles.span}>Juan Pablo Tuttolomondo</span></p>
+   <br></br>
+         <br></br>
+
+
+    <Link to= '/home'> <button className={landPageStyles.btn}>Ingresar</button> </Link>
+
+    <br></br>
+         <br></br>
+         <br></br>
+         <br></br>
+    <p><span className={landPageStyles.span}>Techs: React-Redux-NodeJs-Css-PostGreSql-Sequelize-Express</span></p>
+
 </div>
 )
 }

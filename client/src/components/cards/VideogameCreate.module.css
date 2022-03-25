@@ -1,0 +1,229 @@
+.createBody{
+    overflow-y: hidden ! important;
+    overflow-x: hidden ! important;
+    /*background-color: rgb(250, 220, 139);*/
+background-image: url(../home/abstract-1780165_1920.png);
+    background-size: cover; 
+
+}
+
+.numberDetail{
+    font-size: 5px; 
+}
+.createValid{
+color: red;
+}
+
+.createCard {
+    background-color: rgb(18, 19, 18);
+    margin: 10px;
+    border-radius: 3%;
+border-style: solid;
+border-color: rgb(70, 241, 2);
+    width: 20rem;
+    height:auto;
+    text-align: center;
+    font-size: 6px;
+    font-family: cursive;
+    color: rgba(222, 216, 228, 0.945);
+    
+    flex-wrap:wrap;
+    background-attachment: fixed; 
+     /*centrado en pantalla*/
+margin-left: auto;
+margin-right: auto;
+margin-bottom:300px;/*ver margen dinamicos*/
+ 
+    text-align: center;
+  }
+  .containerCard{
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .cards {
+    flex-wrap: wrap;
+    background-attachment: fixed;
+
+    align-items:flex-end;
+   
+    text-align: center;
+  
+  }
+
+
+  .createTitle {
+    text-align:center;
+    font-family:cursive;
+    
+  color: rgba(222, 216, 228, 0.945);
+    font-size: 3ch;
+    margin-bottom: 2px;
+    margin-top: 0pt;
+  }
+  
+
+
+
+
+
+  .createData {
+    text-align:center;
+    font-family:cursive;
+   line-height: 10px;
+  color: rgba(222, 216, 228, 0.945);
+    font-size:7px;
+    margin-bottom: 0px;
+    margin-top: 0pt;
+  }
+  
+  .closeIcon {
+    display:flex;
+    margin-right: 10px;
+    margin-top: 02px;
+    margin-bottom: 0px;
+    font-size:5px;
+    border-radius: 5px;
+background-color: rgb(255, 23, 243);
+border-width: 1px;
+display: block;
+margin: 0 0 0 auto;
+  }
+  .closeIcon:hover{
+      cursor: pointer;
+    background-color: rgb(207, 236, 175);
+    color: rgb(14, 13, 13);
+}
+
+
+  .card-body {
+    
+    margin-top: 0px !important;
+    padding-top: 20px !important;
+  }
+  .title{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+  }
+  .row {
+    flex-wrap: wrap;
+    background-attachment:fixed;
+    display:flex;
+    justify-content: center;
+  }
+
+  .button1{
+    margin: 0 10px 0 0;
+    padding: 2px 7px 2px 7;
+    margin-top: 3px;
+    margin-bottom: 3px;
+    margin: right 600px;
+    margin: left 30px;
+	background-color:rgb(219, 224, 246);
+    border-color: rgb(4, 26, 3);
+    border: 2px solid;
+border-radius: 10px;
+    width: 100px;
+    height: auto;
+    font-size: 8px;
+    font-family:cursive;
+	cursor:pointer;
+	color:rgb(15, 15, 15);
+font-family: cursive;
+	padding:1px;
+    letter-spacing: 2px;
+}
+.inputCreate{
+    border-radius: 5px;
+    border: 1px solid;
+    width: 150px;
+    height: 8px;
+    font-size: 6px;
+    font-family:cursive;
+    padding: 3px;
+}
+
+.inputDescriptionCreate{
+  
+    border-radius: 5px;
+    border: 1px solid;
+    width: 150px;
+    height: 30px;
+    font-size: 6px;
+    font-family:cursive;
+    padding: 3px;
+}
+
+.box{
+  margin: 0 10px 0 0;
+  padding: 2px 7px 2px 7;
+      background:rgb(219, 224, 246);
+      border: 1px solid;
+      border-radius: 10px;
+      font-size: 6px;
+      height: 17px;
+      padding: 3px;
+      width: 120px;
+      color: rgb(14, 13, 13);
+  font-family:cursive;
+
+}
+
+.box:hover{
+  background-color: rgb(207, 236, 175);
+  color: rgb(14, 13, 13);
+}
+
+.hbox{
+  
+  font-size: 7px;
+
+  text-align:center;
+  margin-left: 3%;
+  color: rgb(32, 7, 141);
+  font-family: cursive;
+ 
+
+}
+.closeIcon1 {
+  display:flex;
+justify-content: flex-start;
+  margin-right: 10px;
+  margin-top: 02px;
+  margin-bottom: 0px;
+  margin-left: 10px;
+  font-size:5px;
+  border-radius: 5px;
+background-color: rgb(251, 255, 20);
+border-width: 1px;
+display: block;
+margin: 0 0 0 auto;
+}
+.closeIcon1:hover{
+    cursor: pointer;
+  background-color: rgb(207, 236, 175);
+  color: rgb(14, 13, 13);
+}
+
+
+
+.numeros{
+
+  list-style-type: none;
+  text-decoration:none;
+}
+.lista{
+align-content: center;
+height: 10px;
+width: 20px;
+font-family: cursive;
+font-size: 7px;
+text-decoration-line: none;
+border-radius: 40% ; 
+padding:20px;
+display:inline-flex;
+margin-top: 2px;
+}
+.letras{
+font-family: cursive;
+font-weight: bold;
+font-size: 15px;
+}
