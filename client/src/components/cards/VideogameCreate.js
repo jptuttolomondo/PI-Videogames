@@ -99,24 +99,41 @@ function handleSelect(e){
    setInput({...input,genres:[...input.genres,e.target.value]})
 }
 
+function handleDeletePlatform(e){
+    console.log('e:  ',e)
+    console.log('dentro de hNDLE ANTES DEL FFILTRIO',input.platforms)
+    setInput({...input,platforms:input.platforms.filter(elem=>elem!==e)})
+   console.log('dentro de hNDLE despues DEL FFILTRIO',input.platforms)
+}
 // function handleDeletePlatform(e){
 //     setInput({...input,platforms:input.platforms.filter(elem=>elem!==e)})
 // }
+
 
 function handleDeleteGenre(e){
     setInput({...input,genres:input.genres.filter(elem=>elem!==e)})
 }
       
 function handlecheck(e){
-    console.log(e.target.value)
+   // console.log(e.target.value)
     setErrors(validate({...input,platforms:[...input.platforms,e.target.value]}))
     if(e.target.checked){
+        console.log('checked: ',e.target.checked)
         setInput({...input,platforms:[...input.platforms,e.target.value]})
-        console.log(input.platforms)
+       // console.log('final :',input.platforms)
     }
-    else   setInput({...input,platforms:[...input.platforms.filter(e=>e!==e)]})
-}
 
+    
+    else {      console.log('platform antes delete: ',input.platforms)
+    console.log('checked: ',e.target.checked)
+    
+     handleDeletePlatform(e)
+       // console.log('lenght de platforms: ',input.platforms.length)
+       
+     
+}
+ setErrors(validate({...input,platforms:[...input.platforms,e.target.value]}))
+}
 
 function handleSubmit(e){
     if (input.name === "") {
@@ -210,31 +227,48 @@ return(
     <div>
   
      <label className={formatCreate.createData}>Plataformas:</label><p></p>
-  <label >PC 
+  
+
+        <label >Android
+    <input type="checkbox"
+    name="Android"
+    value="Android" 
+     onChange={e=>handlecheck(e)}
+   
+    />
+
+
+<label >PC 
     <input type="checkbox"
     name="PC"
     value="PC"
-    onChange={handlecheck}
-    /></label> 
+    onChange={e=>handlecheck(e)}
+    />
+     
+    </label> 
+    
       <label >Xbox 360 
     <input type="checkbox"
     name="Xbox 360"
     value="Xbox 360"
-    onChange={handlecheck}
-    /></label> 
+    onChange={e=>handlecheck(e)}
+    />
+   
+    </label> 
+
         <label >PlayStation 5 
     <input type="checkbox"
     name="PlayStation 5"
     value="PlayStation 5"
-    onChange={handlecheck}
-    /></label> 
-        <label >Android
-    <input type="checkbox"
-    name="Android"
-    value="Android"
-    onChange={handlecheck}
-    /></label> 
+    onChange={e=>handlecheck(e)}
+    onClick={e=>handleDeletePlatform(e)}
+    />
+  
+    </label> 
+
      { errors.platforms && (<p className={formatCreate.createValid}> {errors.platforms} </p> )}
+    </label> 
+    
    </div>
     <div>
   
@@ -251,6 +285,23 @@ return(
     </div>
 
 {/*aui va plaataformas seleccionadas*/}
+
+ <div>
+    <label className={formatCreate.createData}>Plataformas seleccionadas</label>
+    <ul>
+                        {input.platforms.map(e => (
+                          
+                                <li key={e}className={formatCreate.lista}>{e} <button className={formatCreate.closeIcon1}
+                                   type="button"
+                                    onClick={() => handleDeletePlatform(e)}
+                                > X</button>
+                                </li>
+                      
+                        ))}
+                    </ul>
+   
+</div>
+
  
 <div>
     <label className={formatCreate.createData}>Generos seleccionados</label>
@@ -314,3 +365,33 @@ return(
    
     <div></div>
     */
+
+
+
+
+    /*<label >PC 
+    <input type="checkbox"
+    name="PC"
+    value="PC"
+    onChange={e=>handlecheck(e)}
+    />
+     
+    </label> 
+    
+      <label >Xbox 360 
+    <input type="checkbox"
+    name="Xbox 360"
+    value="Xbox 360"
+    onChange={e=>handlecheck(e)}
+    />
+   
+    </label> 
+
+        <label >PlayStation 5 
+    <input type="checkbox"
+    name="PlayStation 5"
+    value="PlayStation 5"
+    onChange={e=>handlecheck(e)}
+    />
+  
+    </label> */
