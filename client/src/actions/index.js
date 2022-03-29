@@ -2,7 +2,7 @@ import axios from 'axios'
 
 export function getAllVideogames(){
 return async function (dispatch){
-    var response= await axios.get('http://localhost:3001/videogames')
+    var response= await axios.get('/videogames')
        return dispatch({type: 'GET_ALL_VIDEOGAMES', payload:response.data})
 }
 }
@@ -34,7 +34,7 @@ export function orderByRating(payload){
 export function getNameVideogames(name){
     return async function (dispatch){
         try{
-             var json=await axios.get('http://localhost:3001/videogames?name='+ name)
+             var json=await axios.get('/videogames?name='+ name)
              return dispatch({type:'GET_NAME_VIDEOGAME',payload:json.data})
        }
         catch(error){alert('no existe el videogame')}
@@ -43,7 +43,7 @@ export function getNameVideogames(name){
 
 export function getGenres(){
     return async function(dispatch){
-        var info= await axios.get('http://localhost:3001/genres')
+        var info= await axios.get('/genres')
         return dispatch({type:'GET_GENRES',payload:info.data})
     }
 }
@@ -51,7 +51,7 @@ export function getGenres(){
 
 export function getPlatforms(){
     return async function(dispatch){
-        var info= await axios.get('http://localhost:3001/platforms')
+        var info= await axios.get('/platforms')
         return dispatch({type:'GET_PLATFORMS',payload:info.data})  
      }
   }
@@ -59,7 +59,7 @@ export function getPlatforms(){
 
 export function postVideogame(payload){
     return async function(dispatch){
-      var result= await axios.post('http://localhost:3001/videogame',payload)
+      var result= await axios.post('/videogame',payload)
        return result
     }
 }
@@ -68,7 +68,7 @@ export function getDetail(id){
     return async function(dispatch)
     {
         try{
-            var json= await axios.get('http://localhost:3001/videogame/'+ id)
+            var json= await axios.get('/videogame/'+ id)
             return dispatch({type:'GET_DETAIL',payload:json.data})
         }
         catch(error){console.log(error)}
