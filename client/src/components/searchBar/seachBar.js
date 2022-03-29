@@ -11,11 +11,8 @@ const dispatch=useDispatch()
 const [name,setName]=useState("")
 
 function handleInputChange(e){
-   console.log(e.target.value) 
 e.preventDefault()
 setName(e.target.value)
-console.log(name)
-
 }
 
 function handleSubmit(e){

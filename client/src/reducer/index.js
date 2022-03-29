@@ -10,10 +10,9 @@ function rootReducer(state=initialState,action){
 switch(action.type){
  case 'GET_ALL_VIDEOGAMES':  return{...state,videogames:action.payload,copiaVideogames:action.payload}
 
- case 'FILTER_BY_GENRE': //la logica va antes del return. adentro del return se rompe
-const allVideos=state.copiaVideogames//cuando haya filtrado y vuelva a enderizar, vuelve a tomar el estado original, no los filtrados
-//console.log('payload: ',action.payload)
-//console.log('allvideo [0] genres[0]:',allVideos[0].genres[0].name)
+ case 'FILTER_BY_GENRE': 
+const allVideos=state.copiaVideogames
+
 const genreFiltered=action.payload==='All'?allVideos:allVideos.filter(elem =>
 
 {
@@ -23,20 +22,17 @@ const genreFiltered=action.payload==='All'?allVideos:allVideos.filter(elem =>
   return undefined
 }
 )
-//console.log(genreFiltered)
+
 return {...state,videogames:genreFiltered}
 
 
-case 'FILTER_BY_PLATFORM': //la logica va antes del return. adentro del return se rompe
-const allVideos1=state.copiaVideogames//cuando haya filtrado y vuelva a enderizar, vuelve a tomar el estado original, no los filtrados
-console.log('payload: ',action.payload)
-//console.log('allvideo [0] genres[0]:',allVideos[0].genres[0].name)
+case 'FILTER_BY_PLATFORM': 
+const allVideos1=state.copiaVideogames
+
 const     platformFiltered=action.payload==='seleccionar'?allVideos1:allVideos1.filter(elem => 
 
 {
-  console.log(elem.platforms)
-  console.log(action.payload)
-  console.log('createInDb:',elem.createdInDb,'elem.platforms[0].name:',elem.platforms[1])
+
   for(let i=0;i<elem.platforms.length;i++){
     if(elem.createdInDb===true&&elem.platforms[i]===action.payload) return true
     if(elem.platforms[i].name===action.payload) return true
@@ -44,7 +40,7 @@ const     platformFiltered=action.payload==='seleccionar'?allVideos1:allVideos1.
   return undefined
 }
 )
-//console.log(platformFiltered)
+
 return {...state,videogames:platformFiltered}
 
 

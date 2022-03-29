@@ -6,18 +6,13 @@ import { getDetail } from "../../actions";
 import detailFormat from'./detail.module.css'
 
 export default function  Detail(){
-        const { id} = useParams();
-
+const { id} = useParams();
 const dispatch= useDispatch()
 
 useEffect(()=>{
-
  dispatch(getDetail(id))
-
 },[dispatch,id])
-
 const myVideo= useSelector((state)=>state.detail)
-
 
 return(
 <div className={detailFormat.detailBody}>
@@ -32,25 +27,21 @@ return(
         <div className={detailFormat.detailTitle} > {myVideo[0].name}</div>
         <img src={myVideo[0].background_image } alt='' width="150" height="100"></img>
         <div className={detailFormat.detailData}>
-        <h2>Descripción: </h2><h3>{myVideo[0].description}</h3>
+        <h2>Descripción: </h2><h3 className={detailFormat.detailData}>{myVideo[0].description}</h3>
         <h2>Rating: <div className={detailFormat.numberDetail}>{myVideo[0].rating}</div> </h2>
-        <h2>Plataformas  : </h2><h4>{myVideo[0].createdInDb===true?  myVideo[0].platforms.map(elem=><p key={elem}>{elem}</p>)
-                                        :myVideo[0].platforms.map(el=><p key={el.name}>{el.name} </p>)}</h4>
-     
-        <h2>Genero/s: </h2><h4>{ myVideo[0].genres.map(elem=><p key={elem.name}> {elem.name} </p>)
-    
+        <h2>Plataformas  : </h2><h4>{myVideo[0].createdInDb===undefined?  myVideo[0].platforms.join(", ")
+                                        :myVideo[0].platforms.map(el=><p key={el}>{el} </p>)}</h4>
+        <h2>Genero/s:
+        </h2><h4>{myVideo[0].createdInDb===undefined?  myVideo[0].genres.join(", ")
+                                        :myVideo[0].genres.map(el=><p key={el.name}>{el.name} </p>)}</h4>
 
-} </h4>
-
+        
         </div>
+
         </div>
                     : <p className={detailFormat.loading}>Loading..</p>
-                   
     }
-
     </div>
 </div>
 )
 }
-
-

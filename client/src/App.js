@@ -24,4 +24,3 @@ function App() {
 }
 export default App;
 
-//fijarse com component en vez de element

@@ -12,15 +12,11 @@ import homeStyles from'./home.module.css'
 export  function Home (){
 const dispatch=useDispatch()
 const allVideos=useSelector((state)=>state.videogames)
-
-
 const [currentPage,setCurrentPage]=useState(1)
 const [videosPerPage]=useState(15)
 const [order,setOrder]=useState('')
 const genres=useSelector((state)=>state.genres)
 const platforms=useSelector((state)=>state.platforms)
-
-
 const indexOfLastVideo= currentPage* videosPerPage
 const indexOfFirstVideo=indexOfLastVideo-videosPerPage
 const currentVideos=allVideos.slice(indexOfFirstVideo,indexOfLastVideo)
@@ -28,10 +24,8 @@ const paginado= (PageNumber)=>{
 setCurrentPage(PageNumber)
 }
 
-
-
 useEffect(()=>{
-    dispatch(getAllVideogames()) //despacha a la action invocada()
+    dispatch(getAllVideogames()) 
     dispatch(getGenres())
     dispatch(getPlatforms())
 },[dispatch]) 
@@ -42,21 +36,17 @@ useEffect(()=>{
 //puede depender de otro estado. si ese estado existe, que se haga el useEffect. en ese caso
 //se popne el estado en el array.
 function handleClick(e){
-  e.preventDefault(); // el preventDefault en la funcion, no en el formulario
-  dispatch(getAllVideogames())  //carga todo de nuevo
+  e.preventDefault(); 
+  dispatch(getAllVideogames())  
 
 }
 
 function handleFilterByGenre(e){
-//console.log('target: ',e.target.value)
-//if(e.target.value==='seleccionar')dispatch (getAllVideogames())
  dispatch(filterVideosByGenre(e.target.value))  
  setCurrentPage(1)
 }
 
 function handleFilterByPlatform(e){
-    //console.log('target: ',e.target.value)
-    //if(e.target.value==='seleccionar')dispatch (getAllVideogames())
      dispatch(filterVideosByPlatform(e.target.value))  
      setCurrentPage(1)
     }
@@ -71,35 +61,22 @@ function handleFilterCreated(e){
 
 }
 function handleOrderByName(e){
-    e.preventDefault(); // el preventDefault en la funcion, no en el formulario
-
-   console.log(e.target.value)
+    e.preventDefault();
    if(e.target.value==="all") dispatch(getAllVideogames())
       dispatch(orderByName(e.target.value))  
-       
    setOrder(`Ordenado ${e.target.value}`) 
    setCurrentPage(1)
-   console.log(order)
 }
 
 
 function handleOrderByRating(e){
     e.preventDefault();
-    
-   console.log(e.target.value)
-   if(e.target.value==="all") dispatch(getAllVideogames())
+      if(e.target.value==="all") dispatch(getAllVideogames())
       dispatch(orderByRating(e.target.value))  
-       
-   setOrder(`Ordenado ${e.target.value}`) 
+     setOrder(`Ordenado ${e.target.value}`) 
+     console.log(order)
    setCurrentPage(1)
-   console.log(order)
-}
-
-
-
-
-
-
+ }
 
 return(
         <div className={homeStyles.fondo}> 
@@ -112,16 +89,13 @@ return(
         <option value="desc" className={homeStyles.hbox}>Ordenar videogames descendente</option>
          </select>
 
-
          <label className={homeStyles.h2}>Ordenar por Rating</label>
             <select onChange={e=> handleOrderByRating(e)} className={homeStyles.box}>
             <option value="all" className={homeStyles.hbox} >Sin Ordenar</option>
          <option value="RatingAsc" className={homeStyles.hbox}>Ordenar por Rating ascendente</option>
         <option value="RatingDesc" className={homeStyles.hbox}>Ordenar por Rating Descendente</option>
          </select>
-      
-           
-
+    
             <label className={homeStyles.h2}>Filtrar por genero</label>
             <select onChange={e=> handleFilterByGenre(e)} className={homeStyles.box}>
             <option value='seleccionar' className= {homeStyles.hbox}>seleccionar</option>
@@ -129,7 +103,6 @@ return(
          <option value={el.name} key={el.id}  className={homeStyles.hbox}>{el.name} </option> 
               ))}
             </select>
-
 
             <label className={homeStyles.h2}>Filtrar por plataforma</label>
             <select onChange={e=> handleFilterByPlatform(e)} className={homeStyles.box}>
@@ -144,8 +117,8 @@ return(
             <option value="All"  className={homeStyles.hbox}>All</option>
             <option value="created"  className={homeStyles.hbox}>Created</option>
             <option value="api"  className={homeStyles.hbox}>existente</option>
-
             </select>
+
                 <p></p>
             <SearchBar/>
             <button onClick={e=>handleClick(e)} className={homeStyles.button1}><div className={homeStyles.hbutton}>Cargar videogames</div></button>
@@ -158,34 +131,21 @@ return(
             allVideos={allVideos.length}
             paginado={paginado}
             />
-           <div className={homeStyles.containerCard}>
-  { 
+
+            <div className={homeStyles.containerCard}>
+            { 
                     currentVideos?.map(e=>{
                         return(
                       <div key={e.id} className={homeStyles.cards}>
-                              
-               
-            
                               <Link to={'/videogame/'+ e.id}> 
-                <Card name={e.name} image={e.background_image} genres={e.genres.map(
-                    elem=>(elem.name ) )   } key={e.id} /> </Link>
-        
-                     </div>  
+                                <Card name={e.name} image={e.background_image} genres={e.genres.map(
+                                elem=>(elem.name ) )   } key={e.id} /> </Link>
+                        </div>  
                      )
-                     
-            })
-        }
-
-
+                     })
+            }
            </div>
-          
         </div>
 )
     }
 
-
-
-/*    
-              <Link to={'/videogame/'+ e.id}> 
-                <Card name={e.name} image={e.background_image} genres={e.genres.map(
-                    elem=>(elem.name ) )   } key={e.id} /> </Link> */

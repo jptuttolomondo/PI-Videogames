@@ -11,12 +11,7 @@ position: absolute;
 
 
       } 
-.flex{
-    display: flex;
-    flex-direction: column;
-    margin-left: 58%;
-    margin-top:150px ;
-}
+
 .span{
     display: block;
     text-align:center;

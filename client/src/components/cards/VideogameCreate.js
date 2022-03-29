@@ -7,9 +7,7 @@ import formatCreate from'./VideogameCreate.module.css'
 export  function VideogameCreate(){
 const dispatch=useDispatch()
 const genres=useSelector((state)=>state.genres)
-const plataforma=useSelector((state)=>state.platforms)
 const [errors,setErrors]=useState({})
-
 const [input,setInput]=useState({
     name:'',
     description:'',
@@ -20,8 +18,6 @@ const [input,setInput]=useState({
     genres:[],
     createdInDb:true
 })
-
-//const plataforma=platformsArray
 
 useEffect(()=>{
     dispatch(getGenres())
@@ -48,13 +44,11 @@ function validate(input) {
         errors.released = "Complete date"
                         } 
                         else{ 
-                      
-                    
-                    if (!(/^(0[1-9]|1\d|2\d|3[01])\-(0[1-9]|1[0-2])\-(0[0-9]|1[0-9]|2[0-2]|8[0-9]|9[0-9])$/.test(input.released)))  //eslint-disable-line
-             errors.released = "Format error (dd-mm-yy). Ingresar fecha valida"
-             else {
-             errors.released = ""
-                 }
+                      if (!(/^(0[1-9]|1\d|2\d|3[01])\-(0[1-9]|1[0-2])\-(0[0-9]|1[0-9]|2[0-2]|8[0-9]|9[0-9])$/.test(input.released)))  //eslint-disable-line
+                    errors.released = "Format error (dd-mm-yy). Ingresar fecha valida"
+                    else {
+                        errors.released = ""
+                         }
                         }
 
 if(!input.background_image)errors.background_image="ingresar url "
@@ -64,14 +58,15 @@ else
 
     if (input.platforms.length < 1) {
         errors.platforms = "Enter platforms"
+        console.log('este array deberia esta vacio',input.platforms)
     } else {
         errors.platforms = ""
+        console.log('este deberia tener dato',input.platforms)
     }
-    if (input.genres.length<1) {console.log('input.genres:',input.genres.lenght)
-        errors.genres = "Enter genres"
-    } else {
-        errors.genres = ""
-    }
+    if (input.genres.length<1) { errors.genres = "Enter genres" 
+                               } else {
+                          errors.genres = ""
+                        }
     return errors
 }
 
@@ -79,60 +74,37 @@ else
 function handleChange(e){
 setErrors(validate({...input,[e.target.name]:e.target.value}))
 setInput({...input,[e.target.name]:e.target.value})
-
-//console.log(input)//e.target.name va a variar dependiendo de en que input este. name, rating, etc
-
+//e.target.name va a variar dependiendo de en que input este. name, rating, etc
 }
-
-
-/*
-function handlePlatforms(e){
-    
-        setErrors(validate({...input,platforms:[...input.platforms,e.target.value]}))
-     setInput({...input,platforms:[...input.platforms,e.target.value]})//ver como se concatena todos los check en un solo string
-    
-    }
-*/
 
 function handleSelect(e){
     setErrors(validate({...input,genres:[...input.genres,e.target.value]}))
    setInput({...input,genres:[...input.genres,e.target.value]})
 }
 
-function handleDeletePlatform(e){
-    console.log('e:  ',e)
-    console.log('dentro de hNDLE ANTES DEL FFILTRIO',input.platforms)
-    setInput({...input,platforms:input.platforms.filter(elem=>elem!==e)})
-   console.log('dentro de hNDLE despues DEL FFILTRIO',input.platforms)
-}
-// function handleDeletePlatform(e){
-//     setInput({...input,platforms:input.platforms.filter(elem=>elem!==e)})
-// }
-
-
 function handleDeleteGenre(e){
     setInput({...input,genres:input.genres.filter(elem=>elem!==e)})
 }
-      
+
 function handlecheck(e){
-   // console.log(e.target.value)
+ 
     setErrors(validate({...input,platforms:[...input.platforms,e.target.value]}))
     if(e.target.checked){
         console.log('checked: ',e.target.checked)
         setInput({...input,platforms:[...input.platforms,e.target.value]})
-       // console.log('final :',input.platforms)
     }
+    else { if(input.platforms.includes(e.target.value)){
+        let aux=input.platforms.indexOf(e.target.value)
+        console.log('checked: ',e.target.checked)
+        setInput({
+            ...input,
+            platforms:[...input.platforms.slice(0, aux), ...input.platforms.slice(aux + 1)]
+        })
+  
+         } 
 
-    
-    else {      console.log('platform antes delete: ',input.platforms)
-    console.log('checked: ',e.target.checked)
-    
-     handleDeletePlatform(e)
-       // console.log('lenght de platforms: ',input.platforms.length)
-       
-     
-}
- setErrors(validate({...input,platforms:[...input.platforms,e.target.value]}))
+          }
+          
 }
 
 function handleSubmit(e){
@@ -141,8 +113,7 @@ function handleSubmit(e){
         alert("Completar correctamente el formulario")
     } else {
     e.preventDefault()
-    //console.log(input)
-    dispatch(postVideogame(input))
+     dispatch(postVideogame(input))
     alert('videogame creado..')
     setInput({
         name:'',
@@ -154,18 +125,12 @@ function handleSubmit(e){
         genres:[],
         createdInDb:true
     })
-
 }
-
 }
 return(
 <div className={formatCreate.createBody}>
     <div className={formatCreate.createCard} >
-
-
-    
-    
-    <Link to='/home' ><button className={formatCreate.closeIcon}title="Volver a Home">X</button></Link>
+          <Link to='/home' ><button className={formatCreate.closeIcon}title="Volver a Home">X</button></Link>
      <div className={formatCreate.createTitle} >Crear nuevo videogame</div>
     <form onSubmit={(e)=>handleSubmit(e)} >
     <div  >
@@ -223,10 +188,9 @@ return(
     />
     {errors.background_image&&(<p className={formatCreate.createValid}>{errors.background_image}</p>)}
     </div>
-{/*aqui va select de plataformass*/}
     <div>
   
-     <label className={formatCreate.createData}>Plataformas:</label><p></p>
+       <label className={formatCreate.createData}>Plataformas:</label><p></p>
   
 
         <label >Android
@@ -234,9 +198,7 @@ return(
     name="Android"
     value="Android" 
      onChange={e=>handlecheck(e)}
-   
-    />
-
+       />
 
 <label >PC 
     <input type="checkbox"
@@ -244,7 +206,6 @@ return(
     value="PC"
     onChange={e=>handlecheck(e)}
     />
-     
     </label> 
     
       <label >Xbox 360 
@@ -253,7 +214,6 @@ return(
     value="Xbox 360"
     onChange={e=>handlecheck(e)}
     />
-   
     </label> 
 
         <label >PlayStation 5 
@@ -261,21 +221,17 @@ return(
     name="PlayStation 5"
     value="PlayStation 5"
     onChange={e=>handlecheck(e)}
-    onClick={e=>handleDeletePlatform(e)}
     />
-  
-    </label> 
-
+      </label> 
+      {!input.platforms[0]&&(<p className={formatCreate.createValid}> ingresar plataforma </p> )}
      { errors.platforms && (<p className={formatCreate.createValid}> {errors.platforms} </p> )}
     </label> 
-    
-   </div>
+    </div>
+
     <div>
-  
-    <label className={formatCreate.createData}>Seleccionar Generos:</label>
+      <label className={formatCreate.createData}>Seleccionar Generos:</label>
     <select onChange={(e)=>handleSelect(e)} className={formatCreate.box}>
         <option value='#'>seleccionar</option>
-     
         {genres.map((el)=>(
          <option value={el.name} key={el.id}>{el.name} </option> 
               ))}
@@ -283,25 +239,6 @@ return(
     <p></p>    <p></p>
     { errors.genres && (<p className={formatCreate.createValid}> {errors.genres} </p> )}
     </div>
-
-{/*aui va plaataformas seleccionadas*/}
-
- <div>
-    <label className={formatCreate.createData}>Plataformas seleccionadas</label>
-    <ul>
-                        {input.platforms.map(e => (
-                          
-                                <li key={e}className={formatCreate.lista}>{e} <button className={formatCreate.closeIcon1}
-                                   type="button"
-                                    onClick={() => handleDeletePlatform(e)}
-                                > X</button>
-                                </li>
-                      
-                        ))}
-                    </ul>
-   
-</div>
-
  
 <div>
     <label className={formatCreate.createData}>Generos seleccionados</label>
@@ -316,7 +253,6 @@ return(
                 
                         ))}
                     </ul>
-   
 </div>
    {
                     errors && (errors.name || errors.rating || errors.description || errors.genres || errors.platforms|| errors.released || errors.background_image) ?
@@ -331,67 +267,3 @@ return(
 )
 }
 
-
-
-/* <div> plñaatadorrmas selecciionadas
-    <label className={formatCreate.createData}>Plataformas seleccionadas</label>
-    <ul>
-                        {input.platforms.map(e => (
-                          
-                                <li key={e}className={formatCreate.lista}>{e} <button className={formatCreate.closeIcon1}
-                                   type="button"
-                                    onClick={() => handleDeletePlatform(e)}
-                                > X</button>
-                                </li>
-                      
-                        ))}
-                    </ul>
-   
-</div>*/
-
-/*
-<div>
-    <label className={formatCreate.createData}>Plataformas:</label>
-    <select onChange={(e)=>handlePlatforms(e)} className={formatCreate.box}>
-        <option value='#'>seleccionar</option>
-        
-        {plataforma.map((elem)=>(
-        <option value={elem} key={elem}>{elem} </option> 
-        ))}
-    </select>
-    { errors.platforms && (<p> {errors.platforms} </p> )}
-    </div>
- 
-   
-    <div></div>
-    */
-
-
-
-
-    /*<label >PC 
-    <input type="checkbox"
-    name="PC"
-    value="PC"
-    onChange={e=>handlecheck(e)}
-    />
-     
-    </label> 
-    
-      <label >Xbox 360 
-    <input type="checkbox"
-    name="Xbox 360"
-    value="Xbox 360"
-    onChange={e=>handlecheck(e)}
-    />
-   
-    </label> 
-
-        <label >PlayStation 5 
-    <input type="checkbox"
-    name="PlayStation 5"
-    value="PlayStation 5"
-    onChange={e=>handlecheck(e)}
-    />
-  
-    </label> */
