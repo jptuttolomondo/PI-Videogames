@@ -1,12 +1,12 @@
 require("dotenv").config();
 const { APIKEY } = process.env;
-
 const { Router } = require("express");
-
 const axios = require("axios");
 const { Videogame, Genre } = require("../db");
 const router = Router();
 
+
+//------------------------------------------------------
 const getApiInfo = async () => {
   let promises = [];
   let allGames = [];
@@ -47,7 +47,7 @@ const getApiInfo = async () => {
     console.log(error);
   }
 };
-
+//-------------------------------------------------------
 const getDbInfo = async () => {
   return await Videogame.findAll({
     include: {
@@ -62,6 +62,7 @@ const getDbInfo = async () => {
     },
   });
 };
+//-------------------------------------------------------
 
 const getAllVideogames = async () => {
   const apiInfo = await getApiInfo();
@@ -71,7 +72,7 @@ const getAllVideogames = async () => {
 
 
 };
-
+//-------------------------------------------------------
 router.get("/videogames", async (req, res) => {
   const name = req.query.name;
   const infoTotal = await getAllVideogames();
@@ -86,6 +87,7 @@ router.get("/videogames", async (req, res) => {
     res.status(200).send(infoTotal);
   }
 });
+//-------------------------------------------------------
 
 const getInfoById = async function (idGame) {
   const apiUrl = await axios.get(
@@ -106,6 +108,7 @@ const getInfoById = async function (idGame) {
   return array;
 };
 
+//-------------------------------------------------------
 router.get("/genres", async (req, res) => {
   const genreApi = await axios.get(
     `https://api.rawg.io/api/genres?key=${APIKEY}`
@@ -119,6 +122,7 @@ router.get("/genres", async (req, res) => {
   const allGenres = await Genre.findAll();
   res.send(allGenres);
 });
+//-------------------------------------------------------
 
 router.get("/platforms", async (req, res) => {
   const platformApi = await axios.get(
@@ -128,6 +132,8 @@ router.get("/platforms", async (req, res) => {
   console.log(plataforma);
   res.send(plataforma);
 });
+
+//-------------------------------------------------------
 
 router.post("/videogame", async (req, res) => {
   let {
@@ -159,6 +165,8 @@ router.post("/videogame", async (req, res) => {
   res.send("videogame creado correctamente");
 });
 
+//-------------------------------------------------------
+
 router.get("/videogame/:id", async (req, res) => {
   let id = req.params.id;
   let videosTotal;
@@ -174,6 +182,28 @@ console.log(videosTotal)
 videosTotal.length? res.status(200).json(videosTotal)
                      : res.status(404).send("videogame no encontrado");
 });
+//-------------------------------------------------------
 
+async function deleteGame(id){
+
+
+console.log('id de function',id)
+
+await Videogame.destroy({
+  where:{id:id},
+  include:{
+    model: Genre,
+    attributes:['name']
+  }
+})
+
+}
+
+router.delete('/delete/:id',async (req,res)=>{
+let id=req.params.id
+console.log(id)
+deleteGame(id)
+res.send('videogame borrado correctamente')
+})
 
 module.exports = router;
