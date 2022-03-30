@@ -67,8 +67,8 @@ const getDbInfo = async () => {
 const getAllVideogames = async () => {
   const apiInfo = await getApiInfo();
   const dbInfo = await getDbInfo();
-  console.log('api:::::',apiInfo)
-  console.log('db::.::',dbInfo)
+  //console.log('api:::::',apiInfo)
+  //console.log('db::.::',dbInfo)
   const infoTotal = apiInfo.concat(dbInfo);
   return infoTotal;
 
@@ -91,24 +91,32 @@ router.get("/videogames", async (req, res) => {
 });
 //-------------------------------------------------------
 
-const getInfoById = async function (idGame) {
-  const apiUrl = await axios.get(
-    `https://api.rawg.io/api/games/${idGame}?key=${APIKEY}`
-  );
-  let array = [];
-  let e = {
-    id: apiUrl.data.id,
-    name: apiUrl.data.name,
-    released: apiUrl.data.released,
-    background_image: apiUrl.data.background_image,
-    rating: apiUrl.data.rating,
-    platforms: apiUrl.data.parent_platforms.map((e) => e.platform.name),
-    genres: apiUrl.data.genres?.map((e) => e.name),
-    description: apiUrl.data.description,
-  };
-  array.push(e);
-  return array;
-};
+// const getInfoById = async function (idGame) {
+
+//   try{
+//   const apiUrl = await axios.get(
+//     `https://api.rawg.io/api/games/${idGame}?key=${APIKEY}`
+//   );
+ 
+//   let array = [];
+//   let e = {
+//     id: apiUrl.data.id,
+//     name: apiUrl.data.name,
+//     released: apiUrl.data.released,
+//     background_image: apiUrl.data.background_image,
+//     rating: apiUrl.data.rating,
+//     platforms: apiUrl.data.parent_platforms.map((e) => e.platform.name),
+//     genres: apiUrl.data.genres?.map((e) => e.name),
+//     description: apiUrl.data.description,
+//   };
+//   array.push(e);
+//   return array;
+// }
+// catch{console.error('no existe el videogame con ese id')
+  
+// }
+
+// };
 
 //-------------------------------------------------------
 router.get("/genres", async (req, res) => {
@@ -170,19 +178,48 @@ router.post("/videogame", async (req, res) => {
 //-------------------------------------------------------
 
 router.get("/videogame/:id", async (req, res) => {
+  
   let id = req.params.id;
   let videosTotal;
   console.log(id)
+  try{
+
+   if(id.includes('-')===false){
   
-  if(id.includes('-')===false) videosTotal = await getInfoById(id);
+      const apiUrl = await axios.get(
+        `https://api.rawg.io/api/games/${id}?key=${APIKEY}`
+      );
+     
+      let array = [];
+      let e = {
+        id: apiUrl.data.id,
+        name: apiUrl.data.name,
+        released: apiUrl.data.released,
+        background_image: apiUrl.data.background_image,
+        rating: apiUrl.data.rating,
+        platforms: apiUrl.data.parent_platforms.map((e) => e.platform.name),
+        genres: apiUrl.data.genres?.map((e) => e.name),
+        description: apiUrl.data.description,
+      };
+      array.push(e);
+    
   
-else{ let fromDb=await getDbInfo()
-  console.log('get from db:',fromDb)
+    videosTotal = array
+
+   }
+ else{ let fromDb=await getDbInfo()
+  //console.log('get from db:',fromDb)
         videosTotal=fromDb.filter(elem=>elem.id===id)
-console.log(videosTotal)
+//console.log(videosTotal)
 }
+
+
 videosTotal.length? res.status(200).json(videosTotal)
                      : res.status(404).send("videogame no encontrado");
+}   
+catch(error){
+  res.status(404).send(console.log("videogame no encontrado al fiunañl"))
+}       
 });
 //-------------------------------------------------------
 

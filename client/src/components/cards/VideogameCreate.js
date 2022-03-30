@@ -22,6 +22,7 @@ const [input,setInput]=useState({
 useEffect(()=>{
     dispatch(getGenres())
   dispatch(getPlatforms())
+
 },[dispatch])
 
 
@@ -78,8 +79,11 @@ setInput({...input,[e.target.name]:e.target.value})
 }
 
 function handleSelect(e){
+
+    if(!input.genres.includes(e.target.value)){
     setErrors(validate({...input,genres:[...input.genres,e.target.value]}))
    setInput({...input,genres:[...input.genres,e.target.value]})
+}
 }
 
 function handleDeleteGenre(e){
@@ -267,3 +271,62 @@ return(
 )
 }
 
+
+
+
+
+
+
+
+/*
+const plataforma=useSelector((state)=>state.platforms)
+
+
+
+
+function handlePlatforms(e){
+    
+        setErrors(validate({...input,platforms:[...input.platforms,e.target.value]}))
+     setInput({...input,platforms:[...input.platforms,e.target.value]})//ver como se concatena todos los check en un solo string
+    
+    }
+
+
+
+
+
+function handleDeletePlatform(e){
+    setInput({...input,platforms:input.platforms.filter(elem=>elem!==e)})
+}
+
+
+
+ <div>
+    <label className={formatCreate.createData}>Plataformas:</label>
+    <select onChange={(e)=>handlePlatforms(e)} className={formatCreate.box}>
+        <option value='#'>seleccionar</option>
+        
+        {plataforma.map((elem)=>(
+        <option value={elem} key={elem}>{elem} </option> 
+        ))}
+    </select>
+    { errors.platforms && (<p> {errors.platforms} </p> )}
+    </div>
+
+
+
+  <div>
+    <label className={formatCreate.createData}>Plataformas seleccionadas</label>
+    <ul>
+                        {input.platforms.map(e => (
+                          
+                                <li key={e}className={formatCreate.lista}>{e} <button className={formatCreate.closeIcon1}
+                                   type="button"
+                                    onClick={() => handleDeletePlatform(e)}
+                                > X</button>
+                                </li>
+                      
+                        ))}
+                    </ul>
+   
+</div>*/

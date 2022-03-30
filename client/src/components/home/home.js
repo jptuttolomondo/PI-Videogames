@@ -28,7 +28,7 @@ useEffect(()=>{
     dispatch(getAllVideogames()) 
     dispatch(getGenres())
     dispatch(getPlatforms())
-},[dispatch]) 
+},[dispatch]) //suscripto a actualizaciones de dispatch. []solo cuando renderice
 
 //el ,[] es para evitar un loop infinito de llamados
 //si hay algo o no dentro del array depende de que necesite el useEffect. si depende del que ocurra o no 

@@ -71,6 +71,9 @@ export function getDetail(id){
             var json= await axios.get('/videogame/'+ id)
             return dispatch({type:'GET_DETAIL',payload:json.data})
         }
-        catch(error){console.log(error)}
+        catch(error){alert('videogame no existe')
+        window.location.replace('/home')
+          
+          }
     }
 }
