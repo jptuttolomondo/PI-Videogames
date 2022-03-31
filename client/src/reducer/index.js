@@ -34,13 +34,15 @@ const     platformFiltered=action.payload==='seleccionar'?allVideos1:allVideos1.
 {
 
   for(let i=0;i<elem.platforms.length;i++){
+
     if(elem.createdInDb===true&&elem.platforms[i]===action.payload) return true
     if(elem.platforms[i].name===action.payload) return true
   }
+
   return undefined
 }
 )
-
+    //console.log(allVideos1)
 return {...state,videogames:platformFiltered}
 
 

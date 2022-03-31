@@ -22,6 +22,8 @@ function handleSubmit(e){
 }
 return (
 <div className={searchBarStyle.bloque}>
+    
+<label className={searchBarStyle.letra}>Buscar por Nombre</label>
 <input type='text'
 placeholder='Buscar videogame...'
 onChange={(e)=>handleInputChange(e)}  className={searchBarStyle.inputSearch}/>

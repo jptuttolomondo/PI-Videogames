@@ -6,9 +6,9 @@ import formatCreate from'./VideogameCreate.module.css'
 
 export  function VideogameCreate(){
 const dispatch=useDispatch()
+const plataforma=useSelector((state)=>state.platforms)
 const allGames=useSelector((state)=>state.videogames)
 const genres=useSelector((state)=>state.genres)
-const [dbCheck, setDbCheck] = useState();
 const [errors,setErrors]=useState({})
 const [input,setInput]=useState({
     name:'',
@@ -28,13 +28,13 @@ useEffect(()=>{
 },[dispatch])
 
 
-useEffect(() => {
-    setDbCheck(allGames.find((game) => game.name === input.name));
-    setErrors( validate({...input, }) );
-  }, [input, allGames, dbCheck]);
 
-
-
+function auxiliar(e){
+    for(let i=0;i<allGames.length;i++){
+        if(allGames[i].name===e)return true
+    }
+    return false
+}
 
 
 function validate(input) {
@@ -45,7 +45,7 @@ function validate(input) {
     else if(! (/^[A-Z]+$/i.test(input.name))) errors.name="El nombre debe contener solo letras"
          else {if(! (/^[A-Z]+$/i.test(input.name))) errors.name="El nombre debe comenzar con mayúsculas"
                 if(! (/^[A-Z][a-z]+$/.test(input.name))) errors.name="El nombre debe comenzar con mayúsculas seguido de todas minúsculas,sin espacios"
-         if(dbCheck) errors.name="El nombre ya existe"
+         if(auxiliar(input.name)) errors.name="El nombre ya existe"
          
             }
     if (!input.description) {
@@ -85,6 +85,7 @@ else
 }
 
 
+
 function handleChange(e){
 setErrors(validate({...input,[e.target.name]:e.target.value}))
 setInput({...input,[e.target.name]:e.target.value})
@@ -99,30 +100,49 @@ function handleSelect(e){
 }
 }
 
+
+
+function handleDeletePlatform(e){
+    setInput({...input,platforms:input.platforms.filter(elem=>elem!==e)})
+}
+
+
 function handleDeleteGenre(e){
     setInput({...input,genres:input.genres.filter(elem=>elem!==e)})
 }
 
-function handlecheck(e){
+// function handlecheck(e){
  
-    setErrors(validate({...input,platforms:[...input.platforms,e.target.value]}))
-    if(e.target.checked){
-        console.log('checked: ',e.target.checked)
-        setInput({...input,platforms:[...input.platforms,e.target.value]})
-    }
-    else { if(input.platforms.includes(e.target.value)){
-        let aux=input.platforms.indexOf(e.target.value)
-        console.log('checked: ',e.target.checked)
-        setInput({
-            ...input,
-            platforms:[...input.platforms.slice(0, aux), ...input.platforms.slice(aux + 1)]
-        })
+//     setErrors(validate({...input,platforms:[...input.platforms,e.target.value]}))
+//     if(e.target.checked){
+//         console.log('checked: ',e.target.checked)
+//         setInput({...input,platforms:[...input.platforms,e.target.value]})
+//     }
+//     else { if(input.platforms.includes(e.target.value)){
+//         let aux=input.platforms.indexOf(e.target.value)
+//         console.log('checked: ',e.target.checked)
+//         setInput({
+//             ...input,
+//             platforms:[...input.platforms.slice(0, aux), ...input.platforms.slice(aux + 1)]
+//         })
   
-         } 
+//          } 
 
-          }
+//           }
           
+// }
+
+
+function handlePlatforms(e){
+    console.log(input.platforms)
+    if(!input.platforms.includes(e.target.value)){
+    setErrors(validate({...input,platforms:[...input.platforms,e.target.value]}))
+ setInput({...input,platforms:[...input.platforms,e.target.value]})//ver como se concatena todos los check en un solo string
+    }
+
+
 }
+
 
 function handleSubmit(e){
     if (input.name === "") {
@@ -205,45 +225,32 @@ return(
     />
     {errors.background_image&&(<p className={formatCreate.createValid}>{errors.background_image}</p>)}
     </div>
-    <div>
+    
+    
+    
+    
   
        <label className={formatCreate.createData}>Plataformas:</label><p></p>
   
+       <div>
+    <label className={formatCreate.createData}>Plataformas:</label>
+    <select onChange={(e)=>handlePlatforms(e)} className={formatCreate.box}>
+        <option value='#'>seleccionar</option>
+        
+        {plataforma.map((elem)=>(
+        <option value={elem} key={elem}>{elem} </option> 
+        ))}
+    </select>
+   
 
-        <label >Android
-    <input type="checkbox"
-    name="Android"
-    value="Android" 
-     onChange={e=>handlecheck(e)}
-       />
-
-<label >PC 
-    <input type="checkbox"
-    name="PC"
-    value="PC"
-    onChange={e=>handlecheck(e)}
-    />
-    </label> 
-    
-      <label >Xbox 360 
-    <input type="checkbox"
-    name="Xbox 360"
-    value="Xbox 360"
-    onChange={e=>handlecheck(e)}
-    />
-    </label> 
-
-        <label >PlayStation 5 
-    <input type="checkbox"
-    name="PlayStation 5"
-    value="PlayStation 5"
-    onChange={e=>handlecheck(e)}
-    />
-      </label> 
       {!input.platforms[0]&&(<p className={formatCreate.createValid}> ingresar plataforma </p> )}
      { errors.platforms && (<p className={formatCreate.createValid}> {errors.platforms} </p> )}
-    </label> 
+    
     </div>
+
+
+
+
 
     <div>
       <label className={formatCreate.createData}>Seleccionar Generos:</label>
@@ -257,6 +264,24 @@ return(
     { errors.genres && (<p className={formatCreate.createValid}> {errors.genres} </p> )}
     </div>
  
+    <div>
+    <label className={formatCreate.createData}>Plataformas seleccionadas</label>
+    <ul>
+                        {input.platforms.map(e => (
+                          
+                                <li key={e}className={formatCreate.lista}>{e} <button className={formatCreate.closeIcon1}
+                                   type="button"
+                                    onClick={() => handleDeletePlatform(e)}
+                                > X</button>
+                                </li>
+                      
+                        ))}
+                    </ul>
+   
+</div>
+
+
+
 <div>
     <label className={formatCreate.createData}>Generos seleccionados</label>
     <ul>
@@ -283,6 +308,10 @@ return(
 </div>
 )
 }
+
+
+
+
 
 
 
@@ -343,3 +372,101 @@ function handleDeletePlatform(e){
                     </ul>
    
 </div>*/
+
+
+
+
+
+/*
+        <label >Android
+    <input type="checkbox"
+    name="Android"
+    value="Android" 
+     onChange={e=>handlecheck(e)}
+       />
+
+<label >PC 
+    <input type="checkbox"
+    name="PC"
+    value="PC"
+    onChange={e=>handlecheck(e)}
+    />
+    </label> 
+    
+      <label >Xbox 360 
+    <input type="checkbox"
+    name="Xbox 360"
+    value="Xbox 360"
+    onChange={e=>handlecheck(e)}
+    />
+    </label> 
+
+        <label >PlayStation 5 
+    <input type="checkbox"
+    name="PlayStation 5"
+    value="PlayStation 5"
+    onChange={e=>handlecheck(e)}
+    />
+      </label> 
+      <label >Linux 
+    <input type="checkbox"
+    name="Linux"
+    value="Linux"
+    onChange={e=>handlecheck(e)}
+    />
+      </label> 
+      <label >PlayStation
+    <input type="checkbox"
+    name="PlayStation"
+    value="PlayStation"
+    onChange={e=>handlecheck(e)}
+    />
+      </label> 
+      <p></p>
+      <label >Nintendo Switch
+    <input type="checkbox"
+    name="Nintendo Switch"
+    value="Nintendo Switch"
+    onChange={e=>handlecheck(e)}
+    />
+      </label> 
+      
+      <label >Nintendo DS
+    <input type="checkbox"
+    name="Nintendo DS"
+    value="Nintendo DS"
+    onChange={e=>handlecheck(e)}
+    />
+      </label> 
+
+      <label >Wii
+    <input type="checkbox"
+    name="Wii"
+    value="Wii"
+    onChange={e=>handlecheck(e)}
+    />
+      </label> 
+
+      <label >PlayStation 4
+    <input type="checkbox"
+    name="PlayStation 4"
+    value="PlayStation 4"
+    onChange={e=>handlecheck(e)}
+    />
+      </label> 
+      <label >macOS
+    <input type="checkbox"
+    name="macOS"
+    value="macOS"
+    onChange={e=>handlecheck(e)}
+    />
+      </label> 
+
+      <label >Classic Macintosh
+    <input type="checkbox"
+    name="Classic Macintosh"
+    value="Classic Macintosh"
+    onChange={e=>handlecheck(e)}
+    />
+      </label> 
+*/

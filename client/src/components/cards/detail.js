@@ -29,6 +29,8 @@ return(
         <div className={detailFormat.detailData}>
         <h2>Descripción: </h2><h3 className={detailFormat.detailData}>{myVideo[0].description}</h3>
         <h2>Rating: <div className={detailFormat.numberDetail}>{myVideo[0].rating}</div> </h2>
+
+ 
         <h2>Plataformas  : </h2><h4>{myVideo[0].createdInDb===undefined?  myVideo[0].platforms.join(", ")
                                         :myVideo[0].platforms.map(el=><p key={el}>{el} </p>)}</h4>
         <h2>Genero/s:

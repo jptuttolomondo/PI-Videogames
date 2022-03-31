@@ -8,7 +8,9 @@ return async function (dispatch){
 }
 
 export function filterVideosByPlatform(payload){
+   // console.log(payload)
     return {
+     
         type:'FILTER_BY_PLATFORM',payload
     }
 }

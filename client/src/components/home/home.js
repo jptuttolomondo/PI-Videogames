@@ -30,11 +30,7 @@ useEffect(()=>{
     dispatch(getPlatforms())
 },[dispatch]) //suscripto a actualizaciones de dispatch. []solo cuando renderice
 
-//el ,[] es para evitar un loop infinito de llamados
-//si hay algo o no dentro del array depende de que necesite el useEffect. si depende del que ocurra o no 
-//el dispatch, entonces dse pone ,[dispatch]. sino se deja vacio
-//puede depender de otro estado. si ese estado existe, que se haga el useEffect. en ese caso
-//se popne el estado en el array.
+
 function handleClick(e){
   e.preventDefault(); 
   dispatch(getAllVideogames())  
@@ -104,14 +100,7 @@ return(
               ))}
             </select>
 
-            <label className={homeStyles.h2}>Filtrar por plataforma</label>
-            <select onChange={e=> handleFilterByPlatform(e)} className={homeStyles.box}>
-            <option value='seleccionar'  className={homeStyles.hbox} >seleccionar</option>
-        {platforms.map((el)=>(
-         <option value={el} key={el}  className={homeStyles.hbox}>{el} </option> 
-              ))}
-            </select>
-
+  
             <label className={homeStyles.h2}>Filtrar por Origen</label>
             <select onChange={e=>handleFilterCreated(e)} className={homeStyles.box}>
             <option value="All"  className={homeStyles.hbox}>All</option>
@@ -149,3 +138,12 @@ return(
 )
     }
 
+
+
+    /*      <label className={homeStyles.h2}>Filtrar por plataforma</label>
+            <select onChange={e=> handleFilterByPlatform(e)} className={homeStyles.box}>
+            <option value='seleccionar'  className={homeStyles.hbox} >seleccionar</option>
+        {platforms.map((el)=>(
+         <option value={el} key={el}  className={homeStyles.hbox}>{el} </option> 
+              ))}
+            </select>*/

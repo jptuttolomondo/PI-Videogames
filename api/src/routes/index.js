@@ -181,9 +181,8 @@ router.get("/videogame/:id", async (req, res) => {
   console.log(videosTotal)
    }
  else{ let fromDb=await getDbInfo()
-  //console.log('get from db:',fromDb)
         videosTotal=fromDb.filter(elem=>elem.id===id)
-//console.log(videosTotal)
+
 }
 
 
