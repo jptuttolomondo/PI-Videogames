@@ -3,7 +3,7 @@ import {useEffect } from 'react'
 import {useDispatch,useSelector} from'react-redux'
 import {Link} from'react-router-dom'
 import { getAllVideogames,filterVideosByGenre,filterCreated,orderByName,
-    getGenres,filterVideosByPlatform, getPlatforms,orderByRating } from '../../actions'
+    getGenres, getPlatforms,orderByRating } from '../../actions'
 import Card from '../cards/card'
 import Paginado from './paginado'
 import SearchBar from '../searchBar/seachBar'
@@ -16,7 +16,6 @@ const [currentPage,setCurrentPage]=useState(1)
 const [videosPerPage]=useState(15)
 const [order,setOrder]=useState('')
 const genres=useSelector((state)=>state.genres)
-const platforms=useSelector((state)=>state.platforms)
 const indexOfLastVideo= currentPage* videosPerPage
 const indexOfFirstVideo=indexOfLastVideo-videosPerPage
 const currentVideos=allVideos.slice(indexOfFirstVideo,indexOfLastVideo)
@@ -42,10 +41,7 @@ function handleFilterByGenre(e){
  setCurrentPage(1)
 }
 
-function handleFilterByPlatform(e){
-     dispatch(filterVideosByPlatform(e.target.value))  
-     setCurrentPage(1)
-    }
+
 
 
 
@@ -147,3 +143,8 @@ return(
          <option value={el} key={el}  className={homeStyles.hbox}>{el} </option> 
               ))}
             </select>*/
+
+            /*function handleFilterByPlatform(e){
+     dispatch(filterVideosByPlatform(e.target.value))  
+     setCurrentPage(1)
+    }*/

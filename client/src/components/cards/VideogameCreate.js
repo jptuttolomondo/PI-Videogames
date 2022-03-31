@@ -72,10 +72,10 @@ else
 
     if (input.platforms.length < 1) {
         errors.platforms = "Enter platforms"
-        console.log('este array deberia esta vacio',input.platforms)
+    
     } else {
         errors.platforms = ""
-        console.log('este deberia tener dato',input.platforms)
+       
     }
     if (input.genres.length<1) { errors.genres = "Enter genres" 
                                } else {
