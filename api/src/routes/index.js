@@ -91,34 +91,7 @@ router.get("/videogames", async (req, res) => {
 });
 //-------------------------------------------------------
 
-// const getInfoById = async function (idGame) {
 
-//   try{
-//   const apiUrl = await axios.get(
-//     `https://api.rawg.io/api/games/${idGame}?key=${APIKEY}`
-//   );
- 
-//   let array = [];
-//   let e = {
-//     id: apiUrl.data.id,
-//     name: apiUrl.data.name,
-//     released: apiUrl.data.released,
-//     background_image: apiUrl.data.background_image,
-//     rating: apiUrl.data.rating,
-//     platforms: apiUrl.data.parent_platforms.map((e) => e.platform.name),
-//     genres: apiUrl.data.genres?.map((e) => e.name),
-//     description: apiUrl.data.description,
-//   };
-//   array.push(e);
-//   return array;
-// }
-// catch{console.error('no existe el videogame con ese id')
-  
-// }
-
-// };
-
-//-------------------------------------------------------
 router.get("/genres", async (req, res) => {
   const genreApi = await axios.get(
     `https://api.rawg.io/api/genres?key=${APIKEY}`
@@ -203,9 +176,9 @@ router.get("/videogame/:id", async (req, res) => {
       };
       array.push(e);
     
-  
-    videosTotal = array
 
+    videosTotal = array
+  console.log(videosTotal)
    }
  else{ let fromDb=await getDbInfo()
   //console.log('get from db:',fromDb)
