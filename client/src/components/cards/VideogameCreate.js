@@ -6,7 +6,9 @@ import formatCreate from'./VideogameCreate.module.css'
 
 export  function VideogameCreate(){
 const dispatch=useDispatch()
+const allGames=useSelector((state)=>state.videogames)
 const genres=useSelector((state)=>state.genres)
+const [dbCheck, setDbCheck] = useState();
 const [errors,setErrors]=useState({})
 const [input,setInput]=useState({
     name:'',
@@ -26,6 +28,15 @@ useEffect(()=>{
 },[dispatch])
 
 
+useEffect(() => {
+    setDbCheck(allGames.find((game) => game.name === input.name));
+    setErrors( validate({...input, }) );
+  }, [input, allGames, dbCheck]);
+
+
+
+
+
 function validate(input) {
     let errors = {}
     if (!input.name) {
@@ -34,7 +45,9 @@ function validate(input) {
     else if(! (/^[A-Z]+$/i.test(input.name))) errors.name="El nombre debe contener solo letras"
          else {if(! (/^[A-Z]+$/i.test(input.name))) errors.name="El nombre debe comenzar con mayúsculas"
                 if(! (/^[A-Z][a-z]+$/.test(input.name))) errors.name="El nombre debe comenzar con mayúsculas seguido de todas minúsculas,sin espacios"
-         }
+         if(dbCheck) errors.name="El nombre ya existe"
+         
+            }
     if (!input.description) {
         errors.description = "Complete description"
     }
