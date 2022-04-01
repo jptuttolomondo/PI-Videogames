@@ -3,7 +3,7 @@ import {useEffect } from 'react'
 import {useDispatch,useSelector} from'react-redux'
 import {Link} from'react-router-dom'
 import { getAllVideogames,filterVideosByGenre,filterCreated,orderByName,
-    getGenres, getPlatforms,orderByRating } from '../../actions'
+    getGenres, getPlatforms,orderByRating,cleanStates } from '../../actions'
 import Card from '../cards/card'
 import Paginado from './paginado'
 import SearchBar from '../searchBar/seachBar'
@@ -11,13 +11,29 @@ import homeStyles from'./home.module.css'
 
 export  function Home (){
 const dispatch=useDispatch()
-const allVideos=useSelector((state)=>state.videogames)
+var allVideos=useSelector((state)=>state.videogames)
+var todosVideos=allVideos
+const filters=useSelector((state)=>state.filters)
+const sort=useSelector((state)=>state.order)
+var searchState=useSelector((state)=>state.search)
+
+
 const [currentPage,setCurrentPage]=useState(1)
 const [videosPerPage]=useState(15)
 const [order,setOrder]=useState('')
 const genres=useSelector((state)=>state.genres)
 const indexOfLastVideo= currentPage* videosPerPage
 const indexOfFirstVideo=indexOfLastVideo-videosPerPage
+
+if(sort.length>0)allVideos=sort
+else if(filters.length>0)allVideos=filters
+      else if(searchState.length>0)allVideos=searchState
+
+
+
+
+
+
 const currentVideos=allVideos.slice(indexOfFirstVideo,indexOfLastVideo)
 const paginado= (PageNumber)=>{
 setCurrentPage(PageNumber)
@@ -31,9 +47,10 @@ useEffect(()=>{
 
 
 function handleClick(e){
+  //console.log('ccargarvideogame')
   e.preventDefault(); 
   dispatch(getAllVideogames())  
-
+ dispatch(cleanStates())
 }
 
 function handleFilterByGenre(e){
@@ -66,7 +83,7 @@ function handleOrderByRating(e){
       if(e.target.value==="all") dispatch(getAllVideogames())
       dispatch(orderByRating(e.target.value))  
      setOrder(`Ordenado ${e.target.value}`) 
-     console.log(order)
+    // console.log(order)
    setCurrentPage(1)
  }
 
@@ -106,7 +123,7 @@ return(
 
                 <p></p>
             <SearchBar/>
-            <button onClick={e=>handleClick(e)} className={homeStyles.button1}><div className={homeStyles.hbutton}>Cargar videogames</div></button>
+             <button onClick={e=>handleClick(e)} className={homeStyles.button1}><div className={homeStyles.hbutton}>Cargar videogames</div></button> 
             <Link to='/videogames'><button  className={homeStyles.button1}><div className={homeStyles.hbutton}>Crear Videogames</div></button>
             </Link>
             <Link to='/'><button  className={homeStyles.button1}><div className={homeStyles.hbutton}>Volver a LandPage</div></button>

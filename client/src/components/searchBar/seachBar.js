@@ -1,14 +1,20 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { getNameVideogames } from "../../actions";
+import { useDispatch, useSelector } from "react-redux";
+import { getNameVideogames,cleanSearch } from "../../actions";
 import searchBarStyle from'./searchBar.module.css'
 
 
 export default function SearchBar(){
 
 const dispatch=useDispatch()
+
 const [name,setName]=useState("")
+// useEffect(()=>{
+//     dispatch(cleanSearch())
+
+// },[dispatch])
+
 
 function handleInputChange(e){
 e.preventDefault()

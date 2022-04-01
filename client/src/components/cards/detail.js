@@ -2,7 +2,7 @@ import React ,{useEffect} from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch ,useSelector} from "react-redux";
 import {Link} from'react-router-dom'
-import { getDetail } from "../../actions";
+import { getDetail, cleanDetail} from "../../actions";
 import detailFormat from'./detail.module.css'
 
 export default function  Detail(){
@@ -10,6 +10,7 @@ const { id} = useParams();
 const dispatch= useDispatch()
 
 useEffect(()=>{
+   dispatch(cleanDetail())
  dispatch(getDetail(id))
 },[dispatch,id])
 const myVideo= useSelector((state)=>state.detail)

@@ -3,6 +3,7 @@ import axios from 'axios'
 export function getAllVideogames(){
 return async function (dispatch){
     var response= await axios.get('/videogames')
+    console.log('entra a getallvideogames')
        return dispatch({type: 'GET_ALL_VIDEOGAMES', payload:response.data})
 }
 }
@@ -58,6 +59,23 @@ export function getPlatforms(){
      }
   }
 
+export function cleanDetail(){
+    return async function(dispatch){
+        return dispatch({type:'CLEAN_DETAIL',payload:[]})
+    }
+}
+
+export function cleanSearch(){
+    return async function(dispatch){
+        return dispatch({type:'CLEAN_SEARCH',payload:[]})
+    }
+}
+
+export function cleanStates(){
+    return async function(dispatch){
+        return dispatch({type:'CLEAN_STATES',payload:[]})
+    }
+}
 
 export function postVideogame(payload){
     return async function(dispatch){
