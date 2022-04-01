@@ -78,17 +78,24 @@ const getAllVideogames = async () => {
 router.get("/videogames", async (req, res) => {
   const name = req.query.name;
   const infoTotal = await getAllVideogames();
-  if (name) {
-    let videoNames = await infoTotal.filter((el) =>
+  if (name) { 
+
+ let videoNames = await infoTotal.filter((el) =>
       el.name.toLowerCase().includes(name.toLowerCase())
     );
     videoNames.length
       ? res.status(200).send(videoNames)
       : res.status(400).send("no existe el videogame");
-  } else {
+    
+  }  else {
     res.status(200).send(infoTotal);
+  } 
+
+    
+
   }
-});
+   
+);
 //-------------------------------------------------------
 
 
