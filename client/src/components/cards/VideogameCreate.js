@@ -91,13 +91,21 @@ setErrors(validate({...input,[e.target.name]:e.target.value}))
 setInput({...input,[e.target.name]:e.target.value})
 //e.target.name va a variar dependiendo de en que input este. name, rating, etc
 }
-
+  
+   
 function handleSelect(e){
+if(input.genres.length<5){
+
 
     if(!input.genres.includes(e.target.value)){
+     
     setErrors(validate({...input,genres:[...input.genres,e.target.value]}))
+    
    setInput({...input,genres:[...input.genres,e.target.value]})
-}
+   console.log(input.genres)
+
+}}
+else{console.log('no ppuede agregar mas dde 4')}
 }
 
 
@@ -121,10 +129,8 @@ function handleDeleteGenre(e){
 //     else { if(input.platforms.includes(e.target.value)){
 //         let aux=input.platforms.indexOf(e.target.value)
 //         console.log('checked: ',e.target.checked)
-//         setInput({
-//             ...input,
-//             platforms:[...input.platforms.slice(0, aux), ...input.platforms.slice(aux + 1)]
-//         })
+//         setInput({...input,platforms:[...input.platforms.slice(0, aux), ...input.platforms.slice(aux + 1)]
+//         })     setInput({...input,genres:[...input.genres,...input.genres.slice(aux+1)]})
   
 //          } 
 

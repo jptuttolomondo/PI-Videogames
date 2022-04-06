@@ -11,34 +11,35 @@ import homeStyles from'./home.module.css'
 
 export  function Home (){
 const dispatch=useDispatch()
+
+//--------estados---------
 var allVideos=useSelector((state)=>state.videogames)
-var todosVideos=allVideos
+//var todosVideos=allVideos
 const filters=useSelector((state)=>state.filters)
 const sort=useSelector((state)=>state.order)
 var searchState=useSelector((state)=>state.search)
+const genres=useSelector((state)=>state.genres)
+const [order,setOrder]=useState('')
 
+
+//---------paginado-------
 
 const [currentPage,setCurrentPage]=useState(1)
 const [videosPerPage]=useState(15)
-const [order,setOrder]=useState('')
-const genres=useSelector((state)=>state.genres)
 const indexOfLastVideo= currentPage* videosPerPage
 const indexOfFirstVideo=indexOfLastVideo-videosPerPage
 
+//------------manejo de estados-------
 if(sort.length>0)allVideos=sort
 else if(filters.length>0)allVideos=filters
-      else if(searchState.length>0)allVideos=searchState
+      if(searchState.length>0)allVideos=searchState
 
-
-
-
-
-
+ //--------paginacion -----------     
 const currentVideos=allVideos.slice(indexOfFirstVideo,indexOfLastVideo)
 const paginado= (PageNumber)=>{
 setCurrentPage(PageNumber)
 }
-
+//----------------
 useEffect(()=>{
     dispatch(getAllVideogames()) 
     dispatch(getGenres())

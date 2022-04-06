@@ -1,5 +1,5 @@
 require("dotenv").config();
-const { APIKEY } = process.env;
+const APIKEY="f147710c8029452f8bead40c2e9046c8";
 const { Router } = require("express");
 const axios = require("axios");
 const { Videogame, Genre } = require("../db");
@@ -80,8 +80,8 @@ router.get("/videogames", async (req, res) => {
   const infoTotal = await getAllVideogames();
   if (name) { 
 
- let videoNames = await infoTotal.filter((el) =>
-      el.name.toLowerCase().includes(name.toLowerCase())
+ let videoNames =  infoTotal.filter((el) =>
+      el.name.toLowerCase().includes(name.toLowerCase()) 
     );
     videoNames.length
       ? res.status(200).send(videoNames)

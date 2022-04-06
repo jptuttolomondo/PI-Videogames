@@ -5,7 +5,7 @@ const path = require('path');
 const { throws } = require('assert');
 const {DB_USER, DB_PASSWORD, DB_HOST,DB_NAME} = process.env;
 
-
+///FALTA ESTE PAASSO EN EL DDEPLOY
 let sequelize =
 process.env.NODE_ENV === "production"
 	? new Sequelize({
