@@ -18,9 +18,9 @@ process.env.NODE_ENV === "production"
 		pool:{
 			max:3,
 			min:1,
-			idle:10000
+			idle:10000,
 		},
-		dialectOption:{
+		dialectOptions:{
 			ssl:{
 				require: true,
 				rejectUnauthorized: false,
