@@ -133,7 +133,9 @@ return(
             <Paginado videosPerPage={videosPerPage}
             allVideos={allVideos.length}
             paginado={paginado}
+            currentPage={currentPage}
             />
+        
 
             <div className={homeStyles.containerCard}>
             { 

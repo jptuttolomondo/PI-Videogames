@@ -1,6 +1,6 @@
 import React from "react";
 import formatList from'./paginado.module.css'
-export default function Paginado({videosPerPage,allVideos,paginado}){
+export default function Paginado({videosPerPage,allVideos,paginado,currentPage}){
 const pageNumber=[]
 
 for(let i=1;i<=Math.ceil(allVideos/videosPerPage);i++){
@@ -9,10 +9,12 @@ pageNumber.push(i)
 
 return(
 <nav>
-<ul className={formatList.numeros}><p className={formatList.letras}>Páginas:</p>   
+<ul className={formatList.numeros}><p className={formatList.letras}>Página: {currentPage} </p>   
     {pageNumber&&pageNumber.map(number=>(
            <li key={number} className={formatList.lista}>
-            <a href="# " onClick={()=>paginado(number)}>{number}</a>
+            <a href="# " className={formatList.lista} onClick={()=>paginado(number)
+                                                     }>{number}</a>
+            
         </li>
     ))
     }

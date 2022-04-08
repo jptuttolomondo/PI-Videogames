@@ -4,6 +4,8 @@
     text-decoration:none;
     border-radius: 5px;
 }
+
+
 .lista{
   background-color: rgb(208, 172, 241); 
   height: 5px;
@@ -17,6 +19,27 @@ display: inline;
 margin-top: 2px;
 margin-bottom: 100px;
 }
+.seleccionado{
+  padding: 5px; 
+  background: gray; 
+  color: rgb(3, 253, 228)
+}
+/* .lista:active { 
+  padding: 10px; 
+  background: gray; 
+  color: rgb(3, 253, 228); 
+}  */
+
+.lista:hover { 
+  padding: 10px; 
+  background: rgb(25, 211, 235); 
+  color: rgb(234, 242, 15); 
+}
+/* .lista:visited { 
+  padding: 10px; 
+  background: rgb(87, 230, 36); 
+  color: rgb(14, 22, 255); 
+}  */
 .letras{
   font-family: cursive;
   font-weight: bold;
