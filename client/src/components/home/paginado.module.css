@@ -35,11 +35,11 @@ margin-bottom: 100px;
   background: rgb(25, 211, 235); 
   color: rgb(234, 242, 15); 
 }
-/* .lista:visited { 
+.lista:visited { 
   padding: 10px; 
   background: rgb(87, 230, 36); 
   color: rgb(14, 22, 255); 
-}  */
+} 
 .letras{
   font-family: cursive;
   font-weight: bold;
